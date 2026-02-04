@@ -457,3 +457,5 @@ obj/
 StudentAssets*
 appsettings.Development.json
 *.db*
+
+/client/ssl/*
