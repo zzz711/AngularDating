@@ -30,4 +30,12 @@
     <Folder Include="Extensions" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Errors" />
+  </ItemGroup>
+
+    <ItemGroup>
+    <Folder Include="Middleware" />
+  </ItemGroup>
+
 </Project>
