@@ -43,7 +43,7 @@ namespace API.Data
                         ImageUrl = member.ImageUrl,
                         Gender = member.Gender,
                         City = member.City,
-                        Country = member.City,
+                        Country = member.Country,
                         LastActive = member.LastActive,
                         Created = member.Created
                     }
