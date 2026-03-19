@@ -47,7 +47,7 @@ namespace API.Controllers
             if (memberId == null)
                 return BadRequest("Could not get member");
 
-            member.DisplayName = memberUpdateDto.DisplayName ?? member.DisplayName;
+            member!.DisplayName = memberUpdateDto.DisplayName ?? member.DisplayName;
             member.Description = memberUpdateDto.Description ?? member.Description;
             member.City = memberUpdateDto.City ?? member.City;
             member.Country = memberUpdateDto.Country ?? member.Country;

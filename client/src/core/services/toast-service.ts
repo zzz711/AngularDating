@@ -12,12 +12,12 @@ export class ToastService {
     if (!document.getElementById('toast-container')) {
       const container = document.createElement('div');
       container.id = 'toast-container';
-      container.className = 'toast toast-bottom toast-end';
+      container.className = 'toast toast-bottom toast-end z-50';
       document.body.appendChild(container);
     }
   }
 
-  private createToastElement(message: string, alertClass: string, duration = 500) {
+  private createToastElement(message: string, alertClass: string, duration = 2000) {
     const toastContainer = document.getElementById('toast-container');
     
     if (!toastContainer) 

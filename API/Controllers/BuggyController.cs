@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -40,6 +41,13 @@ namespace API.Controllers
         public IActionResult GetBadRequest()
         {
             return BadRequest("bad request");
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpGet("admin-secret")]
+        public ActionResult<string> GetSecretAdmin()
+        {
+            return Ok("Only admins should see this");
         }
 
     }
