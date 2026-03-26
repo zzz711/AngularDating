@@ -8,7 +8,7 @@
       />
       <div class="card-body">
         <div class="flex flex-col items-center">
-          <div class="flex text-2xl text-primary items-center" >
+          <div class="flex text-2xl text-primary items-center">
             {{ member.displayName }}, {{ member.dateOfBirth | age }}
             @if (presenceService.onLineUsers().includes(member.id)) {
               <span class="status status-success status-xl absolute ml-0"></span>
@@ -24,8 +24,13 @@
         </ul>
       </div>
       <div class="card-actions justify-between gap-2 px-2 mb-3">
-        <button class="btn btn-info flex-1">Go Back</button>
-        <button class="btn btn-primary flex-1">Like {{ member.displayName }}</button>
+        <button class="btn btn-info flex-1" routerLink="/members">Go Back</button>
+        <button class="btn flex-1"
+          [class.btn-error]="hasLiked()"
+          [class.btn-success]="!hasLiked()"
+          (click)="likesService.toggleLike(member.id)">
+          {{hasLiked() ? 'Remove like' : 'Like ' + member.displayName}}
+        </button>
       </div>
     </div>
     <div class="card bg-base-100 w-3/4 p-6 flex flex-col h-[85vh">
@@ -36,7 +41,7 @@
             class="btn btn-outline btn-primary"
             (click)="memberService.editMode.set(!memberService.editMode())"
           >
-            {{memberService.editMode() ? 'Cancel' : 'Edit'}}
+            {{ memberService.editMode() ? 'Cancel' : 'Edit' }}
           </button>
         }
       </div>

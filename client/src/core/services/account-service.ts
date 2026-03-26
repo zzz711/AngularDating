@@ -52,14 +52,17 @@ export class AccountService {
   }
 
   startTokenRefreshInterval() {
-    setInterval(() => {
-      this.http
-        .post<User>(this.baseUrl + 'account/refresh-token', {}, { withCredentials: true })
-        .subscribe({
-          next: (user) => this.setCurrentUser(user),
-          error: () => this.logout(),
-        });
-    }, 5 * 60 * 1000);
+    setInterval(
+      () => {
+        this.http
+          .post<User>(this.baseUrl + 'account/refresh-token', {}, { withCredentials: true })
+          .subscribe({
+            next: (user) => this.setCurrentUser(user),
+            error: () => this.logout(),
+          });
+      },
+      5 * 60 * 1000,
+    );
   }
 
   setCurrentUser(user: User) {
@@ -73,10 +76,14 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.removeItem('filters');
-    this.currentUser.set(null);
-    this.likesService.clearLikeIds();
-    this.presenceService.stopHubConnection();
+    this.http.post(this.baseUrl + 'account/logout', {}, { withCredentials: true }).subscribe({
+      next: () => {
+        localStorage.removeItem('filters');
+        this.currentUser.set(null);
+        this.likesService.clearLikeIds();
+        this.presenceService.stopHubConnection();
+      },
+    });
   }
 
   private getRolesFromToken(user: User): string[] {
