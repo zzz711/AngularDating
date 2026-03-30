@@ -20,7 +20,6 @@ export class UserManagement implements OnInit {
   }
 
   getUserWithRoles() {
-    let localUsers: User[] = [];
     this.adminService.getUserWithRoles().subscribe({
       next: (users) => this.users.set(users),
     });

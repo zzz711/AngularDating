@@ -5,7 +5,7 @@
         <button
           class="tab"
           [hidden]="
-            tab.value === 'roles' && !accountService.currentUser()?.roles?.includes('admin')
+            tab.value === 'roles' && (!accountService.currentUser()?.roles?.includes('admin') || !accountService.currentUser()?.roles?.includes('Moderator') )
           "
           [class.tab-active]="activeTab === tab.value"
           (click)="setTab(tab.value)"

@@ -47,6 +47,16 @@ namespace API.Data
             return await context.Members.Where(x => x.Id == memberId).SelectMany(x => x.Photos).ToListAsync();
         }
 
+        public async Task<IReadOnlyList<Photo>> GetPhotosForMemberAsync(string memberId, bool isCurrentUser)
+        {
+            var query = context.Members.Where(x => x.Id == memberId).SelectMany(x => x.Photos);
+
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+
+            return await query.ToListAsync();
+        }
+
         public void Update(Member member)
         {
             context.Entry(member).State = EntityState.Modified;

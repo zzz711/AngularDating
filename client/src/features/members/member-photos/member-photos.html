@@ -4,6 +4,9 @@
       <div class="grid grid-cols-4 auto-rows-min gap-3 h-[65vh] overflow-auto">
         @for (photo of photos; track photo.id) {
           <div class="relative">
+              @if (!photo.approved) {
+                <div class="absolute bottom-2 badge self-center badge-error" [class.opacity-30]="!photo.approved">Awaiting approval</div>
+              }
             <img src="{{ photo.url }}" alt="photo of member" class="w-full rounded-lg" />
             @if (accountService.currentUser()?.id === memberService.member()?.id) {
               <app-selected-button

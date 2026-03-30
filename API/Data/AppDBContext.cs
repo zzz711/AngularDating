@@ -25,12 +25,15 @@ namespace API.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Photo>().HasQueryFilter(x => x.Approved);
+
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "member-id", Name = "Member", NormalizedName = "MEMBER", ConcurrencyStamp = "a" },
                 new IdentityRole { Id = "moderator-id", Name = "Moderator", NormalizedName = "MODERATOR", ConcurrencyStamp = "b" },
                 new IdentityRole { Id = "admin-id", Name = "admin", NormalizedName = "ADMIN", ConcurrencyStamp = "c" }
             );
 
+            modelBuilder.Entity<Message>().HasOne(x => x.Recipient).WithMany(m => m.MessagesReceived).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Message>().HasOne(x => x.Recipient).WithMany(m => m.MessagesReceived).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Message>().HasOne(x => x.Sender).WithMany(m => m.MessagesSent).OnDelete(DeleteBehavior.Restrict);
 
