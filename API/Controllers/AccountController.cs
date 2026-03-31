@@ -94,7 +94,7 @@ public class AccountController(UserManager<AppUser> userManager, ITokenService t
         var cookieOpts = new CookieOptions
         {
             HttpOnly = true,
-            Secure = false, //TODO: client is not connecting over https. so this set to false for now. Need to fix client later
+            Secure = true,
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
         };
